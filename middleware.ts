@@ -1,5 +1,5 @@
 import createMiddleware from 'next-intl/middleware';
-import { locales } from './i18n';
+import { locales } from './i18n/request';
 
 export default createMiddleware({
   // List of all supported locales
@@ -15,5 +15,5 @@ export const config = {
   // - API routes
   // - _next (Next.js internals)
   // - static files
-  matcher: ['/((?!api|_next|.*\\..*).*)']
+  matcher: ['/', '/(en|nl|tr)/:path*']
 };

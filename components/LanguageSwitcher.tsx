@@ -2,7 +2,7 @@
 
 import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from 'next/navigation';
-import { locales } from '@/i18n';
+import { locales } from '@/i18n/request';
 
 const languageNames = {
   en: 'English',
