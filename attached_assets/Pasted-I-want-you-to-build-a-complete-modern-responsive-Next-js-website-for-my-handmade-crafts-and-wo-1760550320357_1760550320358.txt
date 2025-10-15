@@ -1,0 +1,51 @@
+I want you to build a complete, modern, responsive **Next.js** website for my handmade crafts and workshops business.
+
+### Description:
+I create and sell all kinds of handmade crafts and organize creative workshops.
+The website should present my work, my story, and allow visitors to register for workshops or send feedback.
+The entire site must support **three languages**: English, Dutch, and Turkish.
+The language should be automatically detected based on the user’s browser or location, but visitors must also be able to switch languages manually via a language selector (e.g., a dropdown or flag icons).
+
+---
+
+### Website Structure:
+1. **Cover Section (Hero)** – A modern, eye-catching hero section with my name, tagline, and a simple responsive navigation bar.
+2. **About Me** – A section introducing me, my creative philosophy, and a few photos.
+3. **Portfolio** – A grid-style gallery of my handmade works, with images and short captions (easy to update later).
+4. **Workshops** – A list of current and upcoming workshops.
+- Each workshop should have its **own registration form**, including fields: name, email, phone, selected workshop/date, and an optional message.
+5. **Contact / Feedback** – A simple contact and feedback form for general inquiries or suggestions.
+
+---
+
+### Design & Style Requirements:
+- A **minimal, elegant, and original** design that reflects the theme of handmade art.
+- Use **natural and calm colors** (beige, soft terracotta, light green, off-white).
+- Fully **responsive** (desktop, tablet, and mobile).
+- Smooth, subtle animations for transitions or hover effects.
+- Elegant, readable typography (Playfair Display, Lora, or Inter).
+- Include a consistent layout with a header, footer, and language switcher available on all pages.
+
+---
+
+### Technical & Structural Requirements:
+- Use **Next.js (latest version)** with **App Router** and **React components**.
+- Implement **internationalization (i18n)** with libraries such as `next-intl`, `next-i18next`, or `react-intl`.
+- Detect user locale automatically and load the corresponding language by default.
+- Allow manual language switching (the user’s choice should persist).
+- Each text string (section titles, labels, etc.) should be stored in translation files for `en`, `nl`, and `tr`.
+- Use a **modular and scalable** folder structure:
+- `/components` for sections (Hero, About, Portfolio, Workshops, Contact)
+- `/locales` for translation files (`en.json`, `nl.json`, `tr.json`)
+- `/public` for images and static assets
+- Use **Tailwind CSS** or **Styled Components** for styling.
+- Forms should have working validation; submission logic can be dummy/local but structured for future backend integration.
+- Code must be **well-documented and commented**, so I can add or modify sections easily.
+- The project should run properly in the **Replit environment**.
+
+---
+
+### Output:
+- Generate a complete and runnable Next.js project with multilingual support.
+- Include example translations in all three languages for all sections.
+- Start the development server so I can preview it live on Replit.
