@@ -4,6 +4,9 @@
 A modern, multilingual Next.js website for a handmade crafts and workshops business. The site supports English, Dutch, and Turkish with automatic locale detection and manual language switching.
 
 ## Recent Changes (October 16, 2025)
+- **Admin CSS Fix**: Fixed admin pages not loading CSS properly
+  - Added global CSS import to app/admin/layout.tsx
+  - Admin login and dashboard pages now display with full styling
 - **Admin Authentication & User Management**: Implemented secure password-based authentication
   - Created admin login page at /admin/login with ADMIN_PASSWORD environment variable
   - Session-based authentication using HTTP-only cookies
