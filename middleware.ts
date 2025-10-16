@@ -15,5 +15,6 @@ export const config = {
   // - API routes
   // - _next (Next.js internals)
   // - static files
-  matcher: ['/', '/(en|nl|tr)/:path*']
+  // - admin routes
+  matcher: ['/((?!api|admin|_next|_vercel|.*\\..*).*)', '/', '/(en|nl|tr)/:path*']
 };
