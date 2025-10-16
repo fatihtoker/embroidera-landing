@@ -4,6 +4,12 @@
 A modern, multilingual Next.js website for a handmade crafts and workshops business. The site supports English, Dutch, and Turkish with automatic locale detection and manual language switching.
 
 ## Recent Changes (October 16, 2025)
+- **Database Integration**: Implemented PostgreSQL database with Drizzle ORM
+  - Created schema with `workshop_enrollments` and `contact_submissions` tables
+  - Added API routes for form submissions (/api/workshop-enrollment, /api/contact-submission)
+  - Built admin dashboard at /admin to view all submissions
+  - Fixed WebSocket issue by switching from @neondatabase/serverless to postgres.js driver
+  - All form data is now persisted to database with locale tracking
 - **SEO Enhancements**: Added comprehensive meta tags for all three languages
   - Title, description, and keywords optimized for each locale
   - Open Graph tags for social media sharing (Facebook, LinkedIn)
@@ -22,6 +28,8 @@ A modern, multilingual Next.js website for a handmade crafts and workshops busin
 
 ### Technology Stack
 - **Framework**: Next.js 15.5.5 with App Router
+- **Database**: PostgreSQL with Drizzle ORM
+- **Database Driver**: postgres.js (for development compatibility)
 - **Internationalization**: next-intl 4.3.12
 - **Styling**: Tailwind CSS 3.x with custom theme
 - **Forms**: React Hook Form + Zod validation
@@ -34,6 +42,16 @@ A modern, multilingual Next.js website for a handmade crafts and workshops busin
 │   ├── [locale]/          # Dynamic locale routes
 │   │   ├── layout.tsx     # Root layout with i18n provider
 │   │   └── page.tsx       # Homepage with all sections
+│   ├── admin/             # Admin dashboard
+│   │   └── page.tsx       # View workshop enrollments and contact submissions
+│   ├── api/               # API routes
+│   │   ├── workshop-enrollment/
+│   │   │   └── route.ts   # Workshop enrollment submission endpoint
+│   │   ├── contact-submission/
+│   │   │   └── route.ts   # Contact form submission endpoint
+│   │   └── admin/
+│   │       └── data/
+│   │           └── route.ts  # Fetch all submissions for admin dashboard
 │   └── globals.css        # Global styles and Tailwind
 ├── components/            # React components
 │   ├── Header.tsx         # Navigation with language switcher
@@ -41,11 +59,15 @@ A modern, multilingual Next.js website for a handmade crafts and workshops busin
 │   ├── About.tsx          # About Me section
 │   ├── Portfolio.tsx      # Portfolio gallery
 │   ├── Workshops.tsx      # Workshops section
-│   ├── WorkshopForm.tsx   # Workshop registration modal
-│   ├── Contact.tsx        # Contact form
+│   ├── WorkshopForm.tsx   # Workshop registration modal with DB integration
+│   ├── Contact.tsx        # Contact form with DB integration
 │   ├── Footer.tsx         # Footer
 │   ├── LanguageSwitcher.tsx  # Language dropdown
 │   └── StructuredData.tsx # JSON-LD structured data for SEO
+├── server/
+│   └── db.ts              # Database connection and Drizzle setup
+├── shared/
+│   └── schema.ts          # Drizzle ORM schema definitions
 ├── i18n/
 │   └── request.ts         # i18n configuration
 ├── locales/               # Translation files
@@ -53,6 +75,7 @@ A modern, multilingual Next.js website for a handmade crafts and workshops busin
 │   ├── nl.json           # Dutch translations
 │   └── tr.json           # Turkish translations
 ├── middleware.ts          # Locale routing middleware
+├── drizzle.config.ts      # Drizzle configuration
 ├── tailwind.config.ts     # Custom theme configuration
 ├── next.config.mjs        # Next.js + next-intl setup
 └── .gitignore             # Git ignore rules for Next.js
@@ -84,6 +107,17 @@ A modern, multilingual Next.js website for a handmade crafts and workshops busin
 - **Contact Form**: Name, email, subject, and message with validation
 - **Validation**: Zod schemas with custom error messages in all languages
 - **UX**: Success modals with localized messages
+- **Database Persistence**: All form submissions saved to PostgreSQL with locale tracking
+
+#### Database & Admin Dashboard
+- **Database**: PostgreSQL with two main tables
+  - `workshop_enrollments`: Stores workshop registration data
+  - `contact_submissions`: Stores contact form submissions
+- **Admin Dashboard**: Available at `/admin` route
+  - Displays all workshop enrollments and contact submissions
+  - Tabbed interface for easy navigation
+  - Shows submission count and detailed information
+  - **Note**: Currently no authentication (add before production)
 
 ### Important Implementation Notes
 
@@ -104,6 +138,11 @@ The project initially had 404 errors due to incorrect i18n configuration. The fi
 - `dynamicParams = false` enforces strict locale validation
 - `generateStaticParams()` pre-generates routes for all locales
 
+#### Database Driver Fix
+- Initially used `@neondatabase/serverless` which caused WebSocket errors (`bufferUtil.mask is not a function`)
+- Switched to `postgres.js` driver for better compatibility in Replit environment
+- Connection configured with `max: 1` to prevent connection pooling issues in development
+
 ### Development Commands
 ```bash
 npm run dev      # Start development server on port 5000
@@ -112,14 +151,15 @@ npm start        # Start production server
 ```
 
 ### Future Enhancements
-- Backend API integration for form submissions
-- Email notifications for workshop registrations
-- CMS integration for easy content management
-- Image optimization and lazy loading for portfolio
-- Workshop calendar with availability tracking
-- Admin dashboard for managing registrations
-- Social media integration
-- Blog section for creative tips and tutorials
+- **Authentication**: Add authentication/authorization for admin dashboard (high priority for production)
+- **Email Notifications**: Implement email notifications for workshop registrations and contact submissions
+- **Localized Error Messages**: Improve API error responses with localized error messages
+- **CMS Integration**: Add content management system for easy content updates
+- **Image Optimization**: Implement lazy loading and optimization for portfolio images
+- **Workshop Calendar**: Add calendar with availability tracking and booking system
+- **Social Media**: Integrate social media feeds and sharing
+- **Blog Section**: Add blog for creative tips and tutorials
+- **Database Monitoring**: Monitor postgres.js connection settings under load
 
 ### User Preferences
 - Clean, well-documented code
