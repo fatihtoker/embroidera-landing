@@ -67,3 +67,5 @@ replit.nix
 
 # Optional
 .eslintcache
+/.local
+/.next
