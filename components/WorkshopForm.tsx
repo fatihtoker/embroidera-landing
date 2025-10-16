@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -19,7 +19,9 @@ type WorkshopFormData = z.infer<ReturnType<typeof createWorkshopSchema>>;
 
 export default function WorkshopForm({ workshopKey, onClose }: { workshopKey: string; onClose: () => void }) {
   const t = useTranslations();
+  const locale = useLocale();
   const [showSuccess, setShowSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
@@ -33,10 +35,37 @@ export default function WorkshopForm({ workshopKey, onClose }: { workshopKey: st
     }
   });
 
-  const onSubmit = (data: WorkshopFormData) => {
-    console.log('Workshop registration:', data);
-    setShowSuccess(true);
-    reset();
+  const onSubmit = async (data: WorkshopFormData) => {
+    setIsSubmitting(true);
+    try {
+      const response = await fetch('/api/workshop-enrollment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          workshop: data.workshop,
+          preferredDate: data.date,
+          message: data.message,
+          locale: locale,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit enrollment');
+      }
+
+      setShowSuccess(true);
+      reset();
+    } catch (error) {
+      console.error('Error submitting workshop enrollment:', error);
+      alert(t('workshopForm.errorMessage') || 'Failed to submit enrollment. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (showSuccess) {
@@ -142,9 +171,10 @@ export default function WorkshopForm({ workshopKey, onClose }: { workshopKey: st
           <div className="flex gap-4">
             <button
               type="submit"
-              className="flex-1 px-6 py-3 bg-terracotta text-white rounded-lg hover:bg-terracotta-dark transition-colors font-inter"
+              disabled={isSubmitting}
+              className="flex-1 px-6 py-3 bg-terracotta text-white rounded-lg hover:bg-terracotta-dark transition-colors font-inter disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {t('workshopForm.submit')}
+              {isSubmitting ? t('workshopForm.submitting') || 'Submitting...' : t('workshopForm.submit')}
             </button>
             <button
               type="button"

@@ -1122,6 +1122,14 @@ video {
   --tw-ring-color: rgb(216 149 128 / var(--tw-ring-opacity, 1));
 }
 
+.disabled\:cursor-not-allowed:disabled {
+  cursor: not-allowed;
+}
+
+.disabled\:opacity-50:disabled {
+  opacity: 0.5;
+}
+
 .group:hover .group-hover\:visible {
   visibility: visible;
 }

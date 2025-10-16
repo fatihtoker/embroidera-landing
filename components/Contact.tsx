@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -17,7 +17,9 @@ type ContactFormData = z.infer<ReturnType<typeof createContactSchema>>;
 
 export default function Contact() {
   const t = useTranslations();
+  const locale = useLocale();
   const [showSuccess, setShowSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
@@ -28,11 +30,36 @@ export default function Contact() {
     resolver: zodResolver(createContactSchema(t)),
   });
 
-  const onSubmit = (data: ContactFormData) => {
-    console.log('Contact form:', data);
-    setShowSuccess(true);
-    reset();
-    setTimeout(() => setShowSuccess(false), 3000);
+  const onSubmit = async (data: ContactFormData) => {
+    setIsSubmitting(true);
+    try {
+      const response = await fetch('/api/contact-submission', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: data.name,
+          email: data.email,
+          subject: data.subject,
+          message: data.message,
+          locale: locale,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit contact form');
+      }
+
+      setShowSuccess(true);
+      reset();
+      setTimeout(() => setShowSuccess(false), 5000);
+    } catch (error) {
+      console.error('Error submitting contact form:', error);
+      alert(t('contact.form.errorMessage') || 'Failed to submit. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -111,9 +138,10 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="w-full px-8 py-4 bg-terracotta text-white rounded-lg hover:bg-terracotta-dark transition-colors font-inter text-lg"
+                disabled={isSubmitting}
+                className="w-full px-8 py-4 bg-terracotta text-white rounded-lg hover:bg-terracotta-dark transition-colors font-inter text-lg disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {t('contact.form.submit')}
+                {isSubmitting ? t('contact.form.submitting') || 'Submitting...' : t('contact.form.submit')}
               </button>
             </form>
           </div>
