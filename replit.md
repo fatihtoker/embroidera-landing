@@ -3,7 +3,14 @@
 ## Overview
 A modern, multilingual Next.js website for a handmade crafts and workshops business. The site supports English, Dutch, and Turkish with automatic locale detection and manual language switching.
 
-## Recent Changes (October 15, 2025)
+## Recent Changes (October 16, 2025)
+- **SEO Enhancements**: Added comprehensive meta tags for all three languages
+  - Title, description, and keywords optimized for each locale
+  - Open Graph tags for social media sharing (Facebook, LinkedIn)
+  - Twitter Card tags for Twitter/X sharing
+  - Structured data (JSON-LD) with Schema.org markup
+  - Canonical URLs and language alternates for multilingual SEO
+  - Viewport configuration and theme color
 - Created complete Next.js 15 application with App Router
 - Implemented multilingual support using next-intl (EN, NL, TR)
 - Built all main sections: Hero, About, Portfolio, Workshops, Contact
@@ -37,7 +44,8 @@ A modern, multilingual Next.js website for a handmade crafts and workshops busin
 │   ├── WorkshopForm.tsx   # Workshop registration modal
 │   ├── Contact.tsx        # Contact form
 │   ├── Footer.tsx         # Footer
-│   └── LanguageSwitcher.tsx  # Language dropdown
+│   ├── LanguageSwitcher.tsx  # Language dropdown
+│   └── StructuredData.tsx # JSON-LD structured data for SEO
 ├── i18n/
 │   └── request.ts         # i18n configuration
 ├── locales/               # Translation files
