@@ -1,5 +1,4 @@
 {
-  "/api/admin/data/route": "app/api/admin/data/route.js",
   "/api/admin/auth/check/route": "app/api/admin/auth/check/route.js",
   "/[locale]/page": "app/[locale]/page.js",
   "/admin/page": "app/admin/page.js",

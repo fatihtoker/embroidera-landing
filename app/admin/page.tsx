@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import UserManagement from '@/components/UserManagement';
 
 type WorkshopEnrollment = {
   id: number;
@@ -31,7 +32,7 @@ export default function AdminPage() {
   const [enrollments, setEnrollments] = useState<WorkshopEnrollment[]>([]);
   const [submissions, setSubmissions] = useState<ContactSubmission[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<'enrollments' | 'contacts'>('enrollments');
+  const [activeTab, setActiveTab] = useState<'enrollments' | 'contacts' | 'users'>('enrollments');
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
   useEffect(() => {
@@ -211,11 +212,24 @@ export default function AdminPage() {
           >
             Contact Submissions ({submissions.length})
           </button>
+          <button
+            onClick={() => setActiveTab('users')}
+            className={`px-6 py-3 rounded-t-lg font-inter transition-colors ${
+              activeTab === 'users'
+                ? 'bg-white text-terracotta font-semibold'
+                : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+            }`}
+          >
+            User Management
+          </button>
         </div>
 
         {/* Content */}
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          {activeTab === 'enrollments' ? (
+        {activeTab === 'users' ? (
+          <UserManagement />
+        ) : (
+          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+            {activeTab === 'enrollments' ? (
             <div className="overflow-x-auto">
               {enrollments.length === 0 ? (
                 <div className="p-8 text-center text-gray-500 font-inter">
@@ -342,7 +356,8 @@ export default function AdminPage() {
               )}
             </div>
           )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );
