@@ -94,10 +94,12 @@
     "message": "Message (Optional)",
     "messagePlaceholder": "Any questions or special requirements?",
     "submit": "Submit Registration",
+    "submitting": "Submitting...",
     "cancel": "Cancel",
     "successTitle": "Registration Successful!",
     "successMessage": "Thank you for registering! We will contact you soon with more details.",
-    "close": "Close"
+    "close": "Close",
+    "errorMessage": "Failed to submit registration. Please try again."
   },
   "contact": {
     "title": "Get in Touch",
@@ -113,9 +115,11 @@
       "message": "Message",
       "messagePlaceholder": "Your message or feedback...",
       "submit": "Send Message",
+      "submitting": "Sending...",
       "successTitle": "Message Sent!",
       "successMessage": "Thank you for your message. I'll get back to you as soon as possible.",
-      "close": "Close"
+      "close": "Close",
+      "errorMessage": "Failed to send message. Please try again."
     }
   },
   "footer": {

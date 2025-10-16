@@ -94,10 +94,12 @@
     "message": "Mesaj (İsteğe Bağlı)",
     "messagePlaceholder": "Sorularınız veya özel istekleriniz?",
     "submit": "Kaydı Gönder",
+    "submitting": "Gönderiliyor...",
     "cancel": "İptal",
     "successTitle": "Kayıt Başarılı!",
     "successMessage": "Kaydınız için teşekkür ederiz! En kısa sürede sizinle iletişime geçeceğiz.",
-    "close": "Kapat"
+    "close": "Kapat",
+    "errorMessage": "Gönderim başarısız. Lütfen tekrar deneyin."
   },
   "contact": {
     "title": "İletişime Geçin",
@@ -113,9 +115,11 @@
       "message": "Mesaj",
       "messagePlaceholder": "Mesajınız veya geri bildiriminiz...",
       "submit": "Mesaj Gönder",
+      "submitting": "Gönderiliyor...",
       "successTitle": "Mesaj Gönderildi!",
       "successMessage": "Mesajınız için teşekkür ederiz. En kısa sürede size geri döneceğim.",
-      "close": "Kapat"
+      "close": "Kapat",
+      "errorMessage": "Gönderim başarısız. Lütfen tekrar deneyin."
     }
   },
   "footer": {
