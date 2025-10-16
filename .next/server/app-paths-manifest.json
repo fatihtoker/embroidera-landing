@@ -1,9 +1,0 @@
-{
-  "/api/admin/users/route": "app/api/admin/users/route.js",
-  "/api/admin/auth/logout/route": "app/api/admin/auth/logout/route.js",
-  "/api/admin/auth/login/route": "app/api/admin/auth/login/route.js",
-  "/api/admin/auth/check/route": "app/api/admin/auth/check/route.js",
-  "/api/admin/data/route": "app/api/admin/data/route.js",
-  "/admin/login/page": "app/admin/login/page.js",
-  "/admin/page": "app/admin/page.js"
-}
