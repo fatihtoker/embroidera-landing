@@ -54,7 +54,8 @@ A modern, multilingual Next.js website for a handmade crafts and workshops busin
 │   └── tr.json           # Turkish translations
 ├── middleware.ts          # Locale routing middleware
 ├── tailwind.config.ts     # Custom theme configuration
-└── next.config.mjs        # Next.js + next-intl setup
+├── next.config.mjs        # Next.js + next-intl setup
+└── .gitignore             # Git ignore rules for Next.js
 ```
 
 ### Key Features
